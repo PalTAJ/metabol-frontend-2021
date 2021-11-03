@@ -15,7 +15,7 @@
         <input type="file" class="form-control" (change)="csvChange($event)">
       </div>
     </div>
-<!--    ////////-->
+    <!--    ////////-->
     <div class="form-group">
       <label class="col-sm-1 control-label">JSON:</label>
       <div class=" col-sm-10 col-md-4">
@@ -24,39 +24,47 @@
     </div>
 
 
+  </div>
+  <!-- </div> -->
+
+
+  <div class="form-horizontal">
+
+
+
+    <div class="form-group">
+      <label class="col-sm-1 control-label">Metabolitics:</label>
+      <div class=" col-sm-10 col-md-4">
+        <input type="file"  class="form-control" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Upload file" accept=".xlsx">
+        <!--      <p>See Metabolitics file format from-->
+        <!--        <a href="assets/example-analyze-doc-files/Metabolitics.xlsx" download="Metabolitics.xlsx">-->
+        <!--          this example file.</a></p>-->
       </div>
-    <!-- </div> -->
-
-
-
-
-
-<div class="form-horizontal">
-
-
-
-  <div class="form-group">
-    <label class="col-sm-1 control-label">Metabolitics:</label>
-    <div class=" col-sm-10 col-md-4">
-          <input type="file"  class="form-control" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Upload file" accept=".xlsx">
-<!--      <p>See Metabolitics file format from-->
-<!--        <a href="assets/example-analyze-doc-files/Metabolitics.xlsx" download="Metabolitics.xlsx">-->
-<!--          this example file.</a></p>-->
     </div>
-  </div>
 
-      <div class="form-group">
-        <label class="col-sm-1 control-label"> Metabolomics Workbench:</label>
-        <div class="col-sm-10 col-md-4">
-              <input type="file" class="form-control" style="display: inline-block;" (change)="readText($event)" placeholder="Upload file" accept=".txt">
-<!--              <p>See Metabolitics file format from-->
-<!--                <a href="assets/example-analyze-doc-files/ST000001_AN000001.txt" download="ST000001_AN000001.txt">-->
-<!--                  this example file.</a></p>-->
-        </div>
+<!--    <div class="form-group">-->
+<!--      <label class="col-sm-1 control-label"> Metabolomics Workbench - Text:</label>-->
+<!--      <div class="col-sm-10 col-md-4">-->
+<!--        <input type="file" class="form-control" style="display: inline-block;" (change)="readText($event)" placeholder="Upload file" accept=".txt">-->
+<!--        &lt;!&ndash;              <p>See Metabolitics file format from&ndash;&gt;-->
+<!--        &lt;!&ndash;                <a href="assets/example-analyze-doc-files/ST000001_AN000001.txt" download="ST000001_AN000001.txt">&ndash;&gt;-->
+<!--        &lt;!&ndash;                  this example file.</a></p>&ndash;&gt;-->
+<!--      </div>-->
+<!--    </div>-->
+
+    <div class="form-group">
+      <label class="col-sm-1 control-label">Metabolomics Workbench:</label>
+      <div class=" col-sm-10 col-md-4">
+        <input type="file" class="form-control" (change)="jsonChange2($event)">
       </div>
+    </div>
+
 
 
   </div>
+
+
+
 </div>
 
 
@@ -67,6 +75,6 @@
 
 
 
-  <div *ngIf="conTable.length">
-    <concentration-table [conTable]="conTable"></concentration-table>
-  </div>
+<div *ngIf="conTable.length">
+  <concentration-table [conTable]="conTable"></concentration-table>
+</div>

@@ -12,16 +12,28 @@
 		  <mat-tab-group>
 			<ng-template ngFor let-type [ngForOf]="data | keys">
 			  <mat-tab *ngIf="data[type].length != 0" [label]="(type == 'list' ? 'private' : type) | titlecase">
-				<div class="panel panel-default">
+<!--///////-->
+          <mat-expansion-panel class="no-body">
+            <mat-expansion-panel-header class="no-body">
+              <mat-panel-title>
+                Dataset
+              </mat-panel-title>
+              <mat-panel-description fxLayoutAlign="end">
+                Analysis Method
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+          </mat-expansion-panel>
+<!--          ######-->
+          <div class="panel panel-default">
 				  <mat-accordion>
 					  <mat-expansion-panel *ngFor="let i of data[type] | orderBy:'name'" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-						  <mat-expansion-panel-header>
+						  <mat-expansion-panel-header  >
 						  <mat-panel-title>
 								  <!-- <a [routerLink]="['/past-analysis', i.id]"> -->
 									  {{i.name}}<!--({{i.status ?  'done' : 'running' }})-->
 									  <!-- </a> -->
 						  </mat-panel-title>
-						  <mat-panel-description>
+						  <mat-panel-description fxLayoutAlign="end">
 								  {{i.method}}
 						  </mat-panel-description>
 						  </mat-expansion-panel-header>

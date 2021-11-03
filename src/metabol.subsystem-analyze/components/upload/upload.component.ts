@@ -6,6 +6,7 @@ import {MetaboliteConcentration} from '../../models/metaboliteConcentration';
 import * as _ from 'lodash';
 import * as XLSX from 'xlsx';
 import { utils, write, WorkBook } from 'xlsx';
+import { NotificationsService } from 'angular2-notifications';
 
 import {SubsystemAnalyzeService} from '../../services/subsystem-analyze';
 import {Router} from '@angular/router';
@@ -51,8 +52,10 @@ export class UploadComponent {
   private login: LoginService,
   private notify: SimpleNotificationsModule,
   private httpClient: HttpClient,
-  private loader: AppDataLoader
-) { }
+  private loader: AppDataLoader,
+  private notify2: NotificationsService,
+
+  ) { }
 
   jsonChange($event) {
     this.readJson($event.target);
@@ -126,6 +129,56 @@ export class UploadComponent {
         });
     }
   }
+
+
+  // work bench json
+  jsonChange2($event) {
+    this.readWorkbenchJson($event.target);
+  }
+
+  readWorkbenchJson(inputValue: any) {
+    const file: File = inputValue.files[0];
+    const myReader: FileReader = new FileReader();
+
+    const file2 = this.selected;
+    myReader.readAsText(file);
+    myReader.onload = (e: any) => {
+      // this.temp = JSON.parse(JSON.stringify(e.target.result));
+      // console.log(1);
+      // console.log(e.target.result);
+
+      // this.temp = JSON.parse(e.target.result);
+      // console.log(2);
+      // console.log(this.temp);
+
+
+      this.httpClient.post(`${AppSettings.API_ENDPOINT}/workbench-json`, {
+        data: e.target.result
+      }).subscribe(data => {
+          const recData = data as JSON;
+          // console.log(data);
+          localStorage.setItem('metabolitics-data', JSON.stringify(recData));
+          this.router.navigate(['/analyze/excel-data']);
+
+
+        },
+        err => {
+          // console.log(err['error']);
+          const msg = err['error']['Message'];
+          this.notify2.error('Bad Request',msg);
+        }
+      );
+    };
+
+  }
+
+
+
+
+
+
+
+
 
   ///////////////////////////////// Workbench
   readText(inputValue: any){

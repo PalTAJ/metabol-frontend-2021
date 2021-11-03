@@ -67,12 +67,13 @@ export class PastAnalysisComponent implements OnInit {
   }
 
   getData(type: string) {
+    // console.log(type);
     let apiUrl = `${AppSettings.API_ENDPOINT}/analysis/${type}`;
     this.http.get(apiUrl, this.login.optionByAuthorization())
 
       .subscribe((d:any) => {
         this.data[type] = d;
-        // console.log(d);
+        console.log(d);
 
         this.createForm();
       });
@@ -87,7 +88,7 @@ export class PastAnalysisComponent implements OnInit {
 
       combined_data = combined_data.concat(this.data[t]);
 
-    // console.log(combined_data);
+    console.log(combined_data);
 
     this.temp = combined_data[0]['id2'];
     // console.log(this.temp);

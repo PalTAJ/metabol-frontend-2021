@@ -127,7 +127,7 @@ export class ExcelComponent implements OnInit {
       // this.metaboliteValues.push(Object.entries(this.usersData2['analysis'][name]['Metabolites']));
     }
     for(let key in this.usersData2['analysis'][this.cases[0]]["Metabolites"]) {
-    this.metaboliteNames.push(key); 
+    this.metaboliteNames.push(key);
   }
 
     this.loader.get('recon2', (recon) => {
@@ -157,12 +157,10 @@ export class ExcelComponent implements OnInit {
 
 }
   });
-  
 
 
-console.log(this.usersData3);
 
-
+// console.log(this.usersData3);
 
 
   localStorage.removeItem('metabolitics-data');
@@ -173,7 +171,7 @@ console.log(this.usersData3);
     onSubmit() {
       // console.log("Analyse under Construction")
 
-  
+
 
 }
 prioritizeMetabolites(metaboliteList) {
@@ -272,9 +270,9 @@ private _filter(name: string): Disease2[] {
         this.router.navigate(['/past-analysis', data['id']]);
       },
         error => {
-          this.notify.error('Analysis Fail', error);
-        });
-  } // if 
+          const msg = error['error']['Message'];
+          this.notify.error('Analysis Fail', msg);        });
+  } // if
   else{
     this.http.post(`${AppSettings.API_ENDPOINT}/analysis/fva/public`,
       data)
@@ -283,10 +281,11 @@ private _filter(name: string): Disease2[] {
         this.router.navigate(['/search']);
       },
         error => {
-          this.notify.error('Analysis Fail', error);
+          const msg = error['error']['Message'];
+          this.notify.error('Analysis Fail', msg);
         });
 
-  }//else 
+  }//else
 
 
   }
@@ -303,11 +302,12 @@ private _filter(name: string): Disease2[] {
            this.router.navigate(['/past-analysis', data['id']]);
          },
          error => {
-         this.notify.error('Analysis Fail', error);
-      });
+           const msg = error['error']['Message'];
+           this.notify.error('Analysis Fail', msg);
+         });
 
     localStorage.setItem('search-results', JSON.stringify(data));
-    
+
     } // if
 else{
   this.http.post(`${AppSettings.API_ENDPOINT}/analysis/direct-pathway-mapping/public`,
@@ -318,12 +318,13 @@ else{
     this.router.navigate(['/search']);
   },
   error => {
-  this.notify.error('Analysis Fail', error);
+    const msg = error['error']['Message'];
+    this.notify.error('Analysis Fail', msg);
 });
 localStorage.setItem('search-results', JSON.stringify(data));
 
 
-}// else 
+}// else
 
   }
 
